@@ -1,0 +1,12 @@
+<h2>{{isEditMode ? 'Edit Task' : 'Create Task'}}</h2>
+
+<form [formGroup]="taskForm" (ngSubmit)="submitTask()">
+    <label for="title">Title
+        <input type="text" id="title" formControlName="title">
+    </label>
+    <label for="description">Description</label>
+    <textarea name="description" 
+    id="description" 
+    formControlName="description"></textarea>
+
+</form>

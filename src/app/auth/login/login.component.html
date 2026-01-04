@@ -1,0 +1,29 @@
+<section class="login-container">
+    <h2 class="section-title">Login</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="login-form">
+        <div class="input-block">
+            <label for="email">Email</label>
+            <input type="email" formControlName="email" id="email">
+            <ng-container *ngIf="isFieldInvalid('email')">
+                <small *ngIf="loginForm.get('email').errors?.required">Email is required.</small>
+                <small *ngIf="loginForm.get('email').errors?.email">Invalid email format.</small>
+            </ng-container>
+        </div>
+        
+        
+        <div class="input-block">
+            <label for="pwd">Password</label>
+            <input type="password"  formControlName="password" id="pwd">
+            <ng-container *ngIf="isFieldInvalid('password')">
+                <small *ngIf="loginForm.get('password')?.errors?.required">
+                    Password is required.
+                </small>
+                <small *ngIf="loginForm.get('password')?.errors?.weakPassword">
+                    Password should be at least 8 characters and must contain one number and one upper case letter.
+                </small>
+            </ng-container>
+        </div>
+        
+        <button type="submit" [disabled]="loginForm.invalid">Login</button>
+    </form>
+</section>

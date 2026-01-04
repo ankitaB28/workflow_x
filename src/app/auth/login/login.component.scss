@@ -1,0 +1,35 @@
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f5f5f5;
+}
+
+.login-form {
+    background: #fff;
+    padding: 2rem;
+    width: 100%;
+    max-width: 380px;
+    padding: 24px;
+    border-radius: 8px;
+}
+
+.section-title{
+    margin-bottom: 24px;
+}
+
+.input-block{
+    margin-bottom: 16px;
+}
+
+.input-block input{
+    display: block;
+    margin-top: 8px;
+}
+
+.input-block label{
+    font-weight: 600;
+    font-size: 14px;
+}
