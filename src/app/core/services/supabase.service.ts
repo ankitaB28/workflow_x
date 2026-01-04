@@ -8,8 +8,8 @@ import { environment } from 'src/environments/environment';
 export class SupabaseService {
 
   // private supabase : SupabaseClient;
-  
-  constructor() { 
+
+  constructor() {
     // this.supabase = createClient(
     //   environment.supabaseUrl,
     //   environment.supabaseAnonKey

@@ -10,7 +10,7 @@ describe('LoginComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ LoginComponent ],
-      providers:[FormBuilder]
+      providers: [FormBuilder]
     })
     .compileComponents();
   });
@@ -25,11 +25,11 @@ describe('LoginComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should disable Login button if form is invalid',()=>{
+  it('should disable Login button if form is invalid', () => {
     const form = component.loginForm;
     form.setValue({
-      email:'',
-      password:'123'
+      email: '',
+      password: '123'
     });
 
     fixture.detectChanges();

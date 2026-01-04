@@ -10,12 +10,12 @@ import { passwordStrengthValidator } from 'src/app/shared/validators/passwordStr
 })
 export class LoginComponent implements OnInit {
 
-  loginForm:FormGroup;
+  loginForm: FormGroup;
 
-  constructor(private fb:FormBuilder) { 
+  constructor(private fb: FormBuilder) {
     this.loginForm = this.fb.group({
-      email:['',[Validators.required,Validators.email]],
-      password:['',[Validators.required,passwordStrengthValidator]]
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, passwordStrengthValidator]]
     });
   }
 
@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
 
   onLogin(): void{}
 
-  isFieldInvalid(field:string): boolean{    
+  isFieldInvalid(field: string): boolean{
     const control = this.loginForm.get(field);
     return !!(control && control.invalid && control.touched);
   }

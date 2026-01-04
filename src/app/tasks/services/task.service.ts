@@ -1,4 +1,4 @@
-import { HttpClient,HttpHeaders, HttpParams, HttpRequest, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -13,52 +13,52 @@ export class TaskService {
 
   private readonly apiUrl = `${environment.supabaseUrl}tasks`;
 
-  header:HttpHeaders = new HttpHeaders({
-      apikey:environment.supabaseAnonKey,
-      authorization:'Bearer '+environment.supabaseAnonKey,
-      Prefer:'count=exact'
+  header: HttpHeaders = new HttpHeaders({
+      apikey: environment.supabaseAnonKey,
+      authorization: 'Bearer ' + environment.supabaseAnonKey,
+      Prefer: 'count=exact'
     });
 
     private totalTask$ = new BehaviorSubject<number>(0);
     total$ = this.totalTask$.asObservable();
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   getTasks(
-    page:number,
-    pageSize:number,
-    status:string
+    page: number,
+    pageSize: number,
+    status: string
   ): Observable<Task[]>{
     const start = (page - 1) * pageSize;
     const end = start + pageSize - 1;
-    
+
     let params = new HttpParams()
-    .set('select','*')
-    .set('order','created_at.desc');
+    .set('select', '*')
+    .set('order', 'created_at.desc');
     // .set('page',page.toString())
     // .set('limit',pageSize.toString());
 
-    
-    
 
-    if(status.toUpperCase() !== 'ALL'){
-       params = params.set('status',`eq.${status}`);
+
+
+    if (status.toUpperCase() !== 'ALL'){
+       params = params.set('status', `eq.${status}`);
     }
-      
 
-    this.header.append( 'Range',`${start}-${end}`);
+
+    this.header.append( 'Range', `${start}-${end}`);
 
     return this.http.get<Task[]>(this.apiUrl,
-      {headers:this.header, params:params, observe:'response'}).pipe(
-        tap((res: HttpResponse<Task[]>)=>{
+      {headers: this.header, params, observe: 'response'}).pipe(
+        tap((res: HttpResponse<Task[]>) => {
           const contentRange = res.headers.get('content-range');
           console.log(contentRange);
           const total = Number(contentRange.split('/')[1]);
-          
+
             // const total = res.headers.get('X-Total-Count');
-            this.totalTask$.next(total ? total : 0)
+          this.totalTask$.next(total ? total : 0);
         }),
-        map((res: HttpResponse<Task[]>)=> res.body || [])
+        map((res: HttpResponse<Task[]>) => res.body || [])
       );
   }
 }

@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TaskFormComponent implements OnInit {
 
-  isEditMode:boolean = false;
+  isEditMode = false;
   constructor() { }
 
   ngOnInit(): void {
