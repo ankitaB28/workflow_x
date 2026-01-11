@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { isFieldInvalid } from 'src/app/shared/utils/form-utils';
 import { passwordStrengthValidator } from 'src/app/shared/validators/passwordStrengthValidator.validator';
 
 @Component({
@@ -24,8 +25,8 @@ export class LoginComponent implements OnInit {
 
   onLogin(): void{}
 
-  isFieldInvalid(field: string): boolean{
-    const control = this.loginForm.get(field);
-    return !!(control && control.invalid && control.touched);
+  isInvalid(form: FormGroup, field: string): boolean{
+
+    return isFieldInvalid(form, field);
   }
 }

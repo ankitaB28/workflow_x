@@ -38,13 +38,9 @@ export class TaskService {
     // .set('page',page.toString())
     // .set('limit',pageSize.toString());
 
-
-
-
     if (status.toUpperCase() !== 'ALL'){
        params = params.set('status', `eq.${status}`);
     }
-
 
     this.header.append( 'Range', `${start}-${end}`);
 
@@ -58,7 +54,70 @@ export class TaskService {
             // const total = res.headers.get('X-Total-Count');
           this.totalTask$.next(total ? total : 0);
         }),
-        map((res: HttpResponse<Task[]>) => res.body || [])
+        map((res: HttpResponse<any[]>) => {
+          if (res.body)
+          {
+            const mappeTaskArray: Task[] = [];
+            res.body.map((task) => {
+              const mappedTask = {
+          id: task.id,
+          title: task.title,
+          description: task.description,
+          status: task.status,
+          priority: task.priority,
+          dueDate: task.due_date,
+          assignedTo: task.assigned_to
+        };
+
+              mappeTaskArray.push(mappedTask);
+            });
+            return mappeTaskArray;
+          }
+          else { return []; }
+        })
       );
+  }
+
+  getTaskById(taskId: number): Observable<Task>{
+    const params = new HttpParams()
+    .set('select', '*')
+    .set('id', `eq.${taskId}`);
+
+    return this.http.get<any>(this.apiUrl, {params})
+    .pipe(
+      map((task) => {
+        task = task[0];
+
+        return task;
+
+        // return mappedTask;
+      })
+    );
+  }
+
+  updateTask(task: Task): Observable<Task>{
+    // const mappedTask = {
+    //       id: task.id,
+    //       title: task.title,
+    //       description: task.description,
+    //       status: task.status,
+    //       priority: task.priority,
+    //       due_date: task.dueDate,
+    //       assigned_to: task.assignedTo
+    //     };
+    return  this.http.patch<Task>(`${this.apiUrl}?id=eq.${task.id}`, task);
+  }
+
+  createTask(task: Task): Observable<Task>{
+    const mappedTask = {
+          id: task.id,
+          title: task.title,
+          description: task.description,
+          status: task.status,
+          priority: task.priority,
+          due_date: task.dueDate,
+          assigned_to: task.assignedTo
+        };
+    return this.http.post<Task>(this.apiUrl, mappedTask, {headers: this.header});
   }
 }

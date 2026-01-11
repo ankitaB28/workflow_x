@@ -6,5 +6,5 @@ export interface Task {
   priority: 'LOW' | 'MEDIUM' | 'HIGH';
   assignedTo?: number;
   dueDate?: string;
-  createdAt: string;
+  createdAt?: string;
 }
