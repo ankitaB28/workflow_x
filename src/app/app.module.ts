@@ -10,6 +10,7 @@ import { TasksModule } from './tasks/tasks.module';
 import { UsersModule } from './users/users.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CaseInterceptor } from './core/interceptors/case.interceptor';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { CaseInterceptor } from './core/interceptors/case.interceptor';
     CoreModule,
     SharedModule,
     TasksModule,
-    UsersModule
+    UsersModule,
+    DashboardModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: CaseInterceptor, multi: true}],
   bootstrap: [AppComponent]

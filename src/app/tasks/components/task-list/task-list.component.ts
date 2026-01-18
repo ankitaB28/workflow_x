@@ -5,69 +5,59 @@ import { TaskService } from '../../services/task.service';
 import { UserService } from 'src/app/users/services/user.service';
 import { map, switchMap } from 'rxjs/operators';
 
-
 @Component({
   selector: 'app-task-list',
   templateUrl: './task-list.component.html',
-  styleUrls: ['./task-list.component.scss']
+  styleUrls: ['./task-list.component.scss'],
 })
 export class TaskListComponent implements OnInit {
-
   tasks$!: Observable<Task[]>;
   total$!: Observable<number>;
 
-  userMap$!: Observable<{[key: number]: string}>;
+  userMap$!: Observable<{ [key: number]: string }>;
 
   private page$ = new BehaviorSubject<number>(1);
-  private status$ = new BehaviorSubject<string>('ALL');
+  private status$ = new BehaviorSubject<string>('All');
 
   pageSize = 5;
   page = 1;
 
   constructor(
     private taskService: TaskService,
-    private userService: UserService
-  ) { }
+    private userService: UserService,
+  ) {}
 
-  ngOnInit(): void{
-
+  ngOnInit(): void {
     this.fetchUserNames();
     this.loadTasks();
-
   }
 
-  fetchUserNames(): void{
+  fetchUserNames(): void {
     this.userMap$ = this.userService.getUsers().pipe(
       map((users) => {
-
-        const mapObj: {[key: number]: string} = {};
-        users.forEach(user => mapObj[user.id] = user.firstname + ' ' + user.lastname);
+        const mapObj: { [key: number]: string } = {};
+        users.forEach(
+          (user) => (mapObj[user.id] = user.firstname + ' ' + user.lastname),
+        );
         return mapObj;
-
-      })
+      }),
     );
-
   }
 
-  loadTasks(): void{
+  loadTasks(): void {
     this.tasks$ = combineLatest([this.page$, this.status$]).pipe(
       switchMap(([page, status]) => {
-        return this.taskService.getTasks(
-          page,
-          this.pageSize,
-          status
-        );
-      })
+        return this.taskService.getTasks(page, this.pageSize, status);
+      }),
     );
     this.tasks$.subscribe((tasks) => {
       console.log(tasks);
-
-     });
+    });
     this.total$ = this.taskService.total$;
-    console.log(this.total$.subscribe(t => t));
+    console.log(this.total$.subscribe((t) => t));
   }
 
-   onPageChange(currentPage: number): void {
+  onPageChange(currentPage: number): void {
     this.page = currentPage;
     this.page$.next(currentPage);
   }
@@ -81,9 +71,7 @@ export class TaskListComponent implements OnInit {
     return task.id;
   }
 
-  logger(obj: any){
+  logger(obj: any) {
     console.log(obj);
-
   }
-
 }
