@@ -11,10 +11,13 @@ import { UsersModule } from './users/users.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CaseInterceptor } from './core/interceptors/case.interceptor';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { SidebarComponent } from './layout/sidebar/sidebar.component';
+import { LayoutModule } from './layout/layout.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -24,7 +27,8 @@ import { DashboardModule } from './dashboard/dashboard.module';
     SharedModule,
     TasksModule,
     UsersModule,
-    DashboardModule
+    DashboardModule,
+    LayoutModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: CaseInterceptor, multi: true}],
   bootstrap: [AppComponent]

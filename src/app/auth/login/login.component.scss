@@ -1,35 +1,107 @@
+// .login-container {
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     justify-content: center;
+//     height: 100vh;
+//     background-color: #f5f5f5;
+// }
+
+// .login-form {
+//     background: #fff;
+//     padding: 2rem;
+//     width: 100%;
+//     max-width: 380px;
+//     padding: 24px;
+//     border-radius: 8px;
+// }
+
+// .section-title{
+//     margin-bottom: 24px;
+// }
+
+// .input-block{
+//     margin-bottom: 16px;
+// }
+
+// .input-block input{
+//     display: block;
+//     margin-top: 8px;
+// }
+
+// .input-block label{
+//     font-weight: 600;
+//     font-size: 14px;
+// }
+
 .login-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-color: #f5f5f5;
-}
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f4f4f4; // Subtle gray background to make the white card pop
+  padding: 1rem;
 
-.login-form {
-    background: #fff;
-    padding: 2rem;
+  .login-card {
+    background-color: #ffffff;
+    border: 1px solid #000000;
+    padding: 2.5rem;
     width: 100%;
-    max-width: 380px;
-    padding: 24px;
-    border-radius: 8px;
-}
+    max-width: 400px;
+    box-shadow: 10px 10px 0px #000000; // Hard enterprise-style shadow
+    
+    @media (max-width: 480px) {
+      padding: 1.5rem;
+      box-shadow: none;
+      border: none;
+      height: 100vh;
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
 
-.section-title{
-    margin-bottom: 24px;
-}
+  .login-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    h2 { font-weight: 900; text-transform: uppercase; letter-spacing: 1px; }
+    }
 
-.input-block{
-    margin-bottom: 16px;
-}
+  .form-field {
+    margin-bottom: 1.5rem;
+    label { display: block; font-weight: bold; margin-bottom: 0.5rem; }
+    input {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #000;
+      font-family: inherit;
+      &:focus { outline: 2px solid #000; outline-offset: 2px; }
+      &.error { border-color: #ff0000; }
+    }
+    small { color: #ff0000; font-size: 0.8rem; }
+  }
 
-.input-block input{
-    display: block;
-    margin-top: 8px;
-}
+  button {
+    width: 100%;
+    background: #000;
+    color: #fff;
+    padding: 1rem;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    &:disabled { opacity: 0.5; cursor: not-allowed; }
+    &:hover:not(:disabled) { background: #333; }
+  }
 
-.input-block label{
-    font-weight: 600;
-    font-size: 14px;
+  .login-footer {
+    margin-top: 1.5rem;
+    text-align: center;
+    .forgot-link {
+      color: #000;
+      text-decoration: underline;
+      font-size: 0.85rem;
+    }
+  }
 }

@@ -12,6 +12,7 @@ import { TaskService } from '../../../tasks/services/task.service';
 import { UserService } from '../../../users/services/user.service';
 import { Task } from '../../../tasks/models/task.model';
 import { User } from '../../../users/models/user.model';
+import { CHART_COLORS, PRIORITY_BORDER_COLORS, PRIORITY_COLORS } from 'src/app/shared/utils/chart-color-util';
 
 @Component({
   selector: 'app-dashboard',
@@ -47,10 +48,11 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   // 📊 Status Chart
   private buildStatusChart(): void {
+    
     const statusCount = {
       OPEN: 0,
       IN_PROGRESS: 0,
-      DONE: 0
+      COMPLETE: 0
     };
 
     this.tasks.forEach(task => statusCount[task.status]++);
@@ -58,13 +60,14 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     new Chart('statusChart', {
       type: 'bar',
       data: {
-        labels: ['Open', 'In Progress', 'Done'],
+        labels: ['Open', 'In Progress', 'Complete'],
         datasets: [{
           data: [
             statusCount.OPEN,
             statusCount.IN_PROGRESS,
-            statusCount.DONE
-          ]
+            statusCount.COMPLETE
+          ],
+          backgroundColor:CHART_COLORS.blue
         }]
       },
       options: {
@@ -77,9 +80,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   // 🥧 Priority Chart
   private buildPriorityChart(): void {
     const priorityCount = {
-      LOW: 0,
-      MEDIUM: 0,
-      HIGH: 0
+      Low: 0,
+      Medium: 0,
+      High: 0
     };
 
     this.tasks.forEach(task => priorityCount[task.priority]++);
@@ -90,10 +93,20 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         labels: ['Low', 'Medium', 'High'],
         datasets: [{
           data: [
-            priorityCount.LOW,
-            priorityCount.MEDIUM,
-            priorityCount.HIGH
-          ]
+            priorityCount.Low,
+            priorityCount.Medium,
+            priorityCount.High
+          ],
+          backgroundColor:[
+            CHART_COLORS.green,
+            CHART_COLORS.yellow,
+            CHART_COLORS.red
+          ],
+          // borderColor:[
+          //   PRIORITY_BORDER_COLORS.low,
+          //   PRIORITY_BORDER_COLORS.medium,
+          //   PRIORITY_BORDER_COLORS.high
+          // ]
         }]
       }
     });

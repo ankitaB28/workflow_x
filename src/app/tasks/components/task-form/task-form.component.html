@@ -39,9 +39,9 @@
     </ng-container>
     <label for="status">Status
         <select name="status" id="status" formControlName="status">
-            <option value="Open">Open</option>
-            <option value="In Progress">In Progress</option>
-            <option value="Complete">Complete</option>
+            <option value="OPEN">Open</option>
+            <option value="IN_PROGRESS">In Progress</option>
+            <option value="COMPLETE">Complete</option>
         </select>
     </label>
     <ng-container *ngIf="isInvalid(taskForm,'status')">

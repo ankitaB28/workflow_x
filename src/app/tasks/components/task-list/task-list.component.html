@@ -1,14 +1,14 @@
-<div class="task-list">
 
+<div class="task-list">
   <h2>Tasks</h2>
 
   <!-- Filter 
    -->
   <select (change)="onStatusChange($event.target.value)">
     <option value="All">All</option>
-    <option value="Open">Open</option>
-    <option value="In Progress">In Progress</option>
-    <option value="Complete">Complete</option>
+    <option value="OPEN">Open</option>
+    <option value="IN_PROGRESS">In Progress</option>
+    <option value="COMPLETE">Complete</option>
   </select>
 
   <!-- Task Table -->
@@ -27,10 +27,19 @@
       <ng-container *ngIf="userMap$ | async as userMap">
         <tr *ngFor="let task of tasks$ | async; trackBy: trackByTaskId">
           <td>{{ task.title }}</td>
-          <td>{{ task.status }}</td>
+
+          <td>
+            {{
+              task.status === "OPEN"
+                ? "Open"
+                : task.status === "COMPLETE"
+                  ? "Complete"
+                  : "In Progress"
+            }}
+          </td>
           <td>{{ task.priority }}</td>
-          <td>{{ userMap[task.assignedTo] || 'Unassigned' }}</td>
-          <td>{{ task.dueDate | date  }}</td>
+          <td>{{ userMap[task.assignedTo] || "Unassigned" }}</td>
+          <td>{{ task.dueDate | date }}</td>
         </tr>
       </ng-container>
     </tbody>
@@ -38,14 +47,15 @@
 
   <!-- Pagination -->
   <div class="pagination" *ngIf="total$ | async as total">
-    <button
-      (click)="onPageChange(page - 1)"
-      [disabled]="total <= pageSize">
+    <button (click)="onPageChange(page - 1)" [disabled]="total <= pageSize">
       Prev
     </button>
 
-    <button [disabled]="page * pageSize >= total" (click)="onPageChange(page + 1)">Next</button>
-    
+    <button
+      [disabled]="page * pageSize >= total"
+      (click)="onPageChange(page + 1)"
+    >
+      Next
+    </button>
   </div>
-
 </div>
