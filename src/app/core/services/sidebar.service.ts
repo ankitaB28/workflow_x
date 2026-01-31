@@ -14,7 +14,7 @@ export interface MenuItem {
   providedIn: 'root'
 })
 export class SidebarService {
-  private _menuItems = new BehaviorSubject<MenuItem[]>([
+  private menuItems = new BehaviorSubject<MenuItem[]>([
     {
       id: 'dashboard',
       label: 'Dashboard',
@@ -27,17 +27,17 @@ export class SidebarService {
       icon: 'folder',
       route: '/projects',
       children: [
-        { 
-          id: 'project-list', 
-          label: 'All Projects', 
-          icon: 'list', 
-          route: '/projects/list' 
+        {
+          id: 'project-list',
+          label: 'All Projects',
+          icon: 'list',
+          route: '/projects/list'
         },
-        { 
-          id: 'project-create', 
-          label: 'Create Project', 
-          icon: 'add', 
-          route: '/projects/create' 
+        {
+          id: 'project-create',
+          label: 'Create Project',
+          icon: 'add',
+          route: '/projects/create'
         }
       ]
     },
@@ -54,19 +54,19 @@ export class SidebarService {
       route: '/settings'
     }
   ]);
-  menuItems$ = this._menuItems.asObservable();
+  menuItems$ = this.menuItems.asObservable();
   private sidebarState = new BehaviorSubject<boolean>(true);
   sidebarOpen$ = this.sidebarState.asObservable();
 
-  open() {
+  open(): void {
     this.sidebarState.next(true);
   }
 
-  close() {
+  close(): void {
     this.sidebarState.next(false);
   }
 
-  toggle() {
+  toggle(): void {
     this.sidebarState.next(!this.sidebarState.value);
   }
 }

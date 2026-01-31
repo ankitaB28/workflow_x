@@ -14,6 +14,11 @@ import { Task } from '../../../tasks/models/task.model';
 import { User } from '../../../users/models/user.model';
 import { CHART_COLORS, PRIORITY_BORDER_COLORS, PRIORITY_COLORS } from 'src/app/shared/utils/chart-color-util';
 
+import { DashboardStatsService } from '../../services/dashboard-stats.service';
+
+
+type StatKey = 'animatedTotal' | 'animatedCompleted' | 'animatedInProgress' | 'animatedOpen';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -24,14 +29,25 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   private tasks: Task[] = [];
   private users: User[] = [];
+  animatedTotal = 0;
+  animatedCompleted = 0;
+  animatedInProgress = 0;
+  animatedOpen = 0;
+
 
   constructor(
     private taskService: TaskService,
-    private userService: UserService
+    private userService: UserService,
+    private statsService: DashboardStatsService
   ) {}
 
   ngOnInit(): void {
-    combineLatest([
+    this.generateCharts();
+    this.getAnimatedCounts();
+  }
+
+  private generateCharts(): void{
+     combineLatest([
       this.taskService.getAllTasks(),
       this.userService.getUsers()
     ]).subscribe(([tasks, users]) => {
@@ -44,11 +60,44 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     });
   }
 
+  private getAnimatedCounts(): void {
+     this.statsService.getStats().subscribe(stats => {
+      this.animatedTotal = stats.total;
+      this.animatedCompleted = stats.completed;
+      this.animatedInProgress = stats.inProgress;
+      this.animatedOpen =  stats.open;
+    });
+  }
+
+//   private animateCount(property: StatKey, target: number) {
+//   if (target === 0) {
+//     this[property] = 0;
+//     return;
+//   }
+
+//   let current = 0;
+//   const steps = 20;
+//   const increment = Math.max(1, Math.floor(target / steps));
+//   console.log(target);
+
+//   const interval = setInterval(() => {
+//     current += increment;
+
+//     if (current >= target) {
+//       this[property] = target;
+//       clearInterval(interval);
+//     } else {
+//       this[property] = current;
+//     }
+//   }, 30);
+// }
+
+
   ngAfterViewInit(): void {}
 
   // 📊 Status Chart
   private buildStatusChart(): void {
-    
+
     const statusCount = {
       OPEN: 0,
       IN_PROGRESS: 0,
@@ -57,7 +106,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
     this.tasks.forEach(task => statusCount[task.status]++);
 
-    new Chart('statusChart', {
+    const barChart = new Chart('statusChart', {
       type: 'bar',
       data: {
         labels: ['Open', 'In Progress', 'Complete'],
@@ -67,7 +116,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
             statusCount.IN_PROGRESS,
             statusCount.COMPLETE
           ],
-          backgroundColor:CHART_COLORS.blue
+          backgroundColor: CHART_COLORS.blue
         }]
       },
       options: {
@@ -87,7 +136,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
     this.tasks.forEach(task => priorityCount[task.priority]++);
 
-    new Chart('priorityChart', {
+    const pieChart = new Chart('priorityChart', {
       type: 'pie',
       data: {
         labels: ['Low', 'Medium', 'High'],
@@ -97,7 +146,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
             priorityCount.Medium,
             priorityCount.High
           ],
-          backgroundColor:[
+          backgroundColor: [
             CHART_COLORS.green,
             CHART_COLORS.yellow,
             CHART_COLORS.red
@@ -114,12 +163,12 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   // 📈 Tasks by Assignee
   private buildAssigneeChart(): void {
-    const labels = this.users.map(u => u.firstname+ ' ' + u.lastname);
+    const labels = this.users.map(u => u.firstname + ' ' + u.lastname);
     const data = this.users.map(
       u => this.tasks.filter(t => t.assignedTo === u.id).length
     );
 
-    new Chart('assigneeChart', {
+    const barChart = new Chart('assigneeChart', {
       type: 'horizontalBar',
       data: {
         labels,

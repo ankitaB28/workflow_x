@@ -8,10 +8,10 @@ import { AuthService } from './core/services/auth.service';
 })
 export class AppComponent implements DoCheck {
   title = 'WorkFlowX';
-  // isCollapsed = false; 
+  // isCollapsed = false;
   // isLoggedIn$ = this.authService.isLoggedIn$;
   // constructor(private authService:AuthService){
-   
+
   // }
   // toggleSidebar(): void {
   //   this.isCollapsed = !this.isCollapsed;
@@ -19,6 +19,6 @@ export class AppComponent implements DoCheck {
 
   ngDoCheck(): void{
     //  console.log(this.authService.isAuthentited());
-    
+
   }
 }

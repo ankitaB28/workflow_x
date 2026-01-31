@@ -8,7 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
-  declarations: [LayoutComponent,SidebarComponent],
+  declarations: [LayoutComponent, SidebarComponent],
   imports: [
     CommonModule,
     LayoutRoutingModule,

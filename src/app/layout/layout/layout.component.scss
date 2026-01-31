@@ -2,7 +2,7 @@
 .layout {
   display: flex;
   height: 100vh;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 app-sidebar {
@@ -11,7 +11,7 @@ app-sidebar {
 
 .content {
   flex: 1;
-  overflow: hidden;
+  overflow-x: hidden;
   background: #f8fafc;
   padding: 1rem;
 
@@ -25,12 +25,18 @@ app-sidebar {
   display: flex;
   align-items: center;
   padding: 0 1rem;
- 
+  position: relative;
   height: 52px;
   background: #111827;
   box-shadow: 0 1px 4px rgba(0,0,0,0.15);
 
 
+}
+
+.title{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .toggle-btn {

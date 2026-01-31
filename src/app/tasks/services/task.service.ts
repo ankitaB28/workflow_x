@@ -24,7 +24,7 @@ export class TaskService {
 
   constructor(private http: HttpClient) { }
 
-  getAllTasks():Observable<Task[]>{
+  getAllTasks(): Observable<Task[]>{
     return this.http.get<Task[]>(this.apiUrl);
   }
 
@@ -39,7 +39,7 @@ export class TaskService {
     let params = new HttpParams()
       .set('select', '*')
       .set('order', 'created_at.desc');
-    
+
     if (status !== 'All') {
       params = params.set('status', `eq.${status}`);
     }
@@ -58,7 +58,7 @@ export class TaskService {
         }),
         map((res: HttpResponse<any[]>) => {
           return res.body || [];
-          
+
         })
       );
   }
@@ -94,7 +94,7 @@ export class TaskService {
   }
 
   createTask(task: Task): Observable<Task> {
-    
+
     return this.http.post<Task>(this.apiUrl, task);
   }
 }

@@ -11,7 +11,7 @@ import { isFieldInvalid } from 'src/app/shared/utils/form-utils';
 @Component({
   selector: 'app-task-form',
   templateUrl: './task-form.component.html',
-  styleUrls: ['./task-form.component.scss'],
+  styleUrls: ['./task-form.component.scss', '../../../shared/styles/form-styles.scss'],
 })
 export class TaskFormComponent implements OnInit {
   isEditMode = false;
@@ -92,7 +92,5 @@ export class TaskFormComponent implements OnInit {
     return isFieldInvalid(form, field);
   }
 
-  logger(obj: any) {
-    console.log(obj);
-  }
+
 }

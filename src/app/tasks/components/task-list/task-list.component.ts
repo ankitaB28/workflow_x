@@ -71,7 +71,5 @@ export class TaskListComponent implements OnInit {
     return task.id;
   }
 
-  logger(obj: any) {
-    console.log(obj);
-  }
+
 }

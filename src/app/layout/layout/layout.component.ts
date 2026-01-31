@@ -12,7 +12,7 @@ export class LayoutComponent {
 
   constructor(private sidebarService: SidebarService) {}
 
-  toggleSidebar() {
+  toggleSidebar(): void {
     this.sidebarService.toggle();
   }
 }

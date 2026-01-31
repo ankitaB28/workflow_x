@@ -4,7 +4,7 @@ export const CHART_COLORS = {
   blue: '#3b82f6',
   green: '#22c55e',
   red: '#f87171',
-  yellow:'#facc15' 
+  yellow: '#facc15'
 };
 
 export const PRIORITY_COLORS = {
