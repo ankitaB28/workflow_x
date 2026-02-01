@@ -1,5 +1,5 @@
 name: Angular CI
-
+run-name: npm ci
 on:
   push:
     branches: [ main ]
