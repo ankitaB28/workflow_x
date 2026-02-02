@@ -12,7 +12,7 @@ describe('TaskFormComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ TaskFormComponent ],
       providers: [FormBuilder],
-      imports: [ReactiveFormsModule,RouterTestingModule]
+      imports: [ReactiveFormsModule, RouterTestingModule]
     })
     .compileComponents();
   });
