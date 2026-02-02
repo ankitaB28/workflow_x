@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TaskFormComponent } from './task-form.component';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('TaskFormComponent', () => {
   let component: TaskFormComponent;
@@ -11,7 +12,7 @@ describe('TaskFormComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ TaskFormComponent ],
       providers: [FormBuilder],
-      imports: [ReactiveFormsModule]
+      imports: [ReactiveFormsModule,RouterTestingModule]
     })
     .compileComponents();
   });
