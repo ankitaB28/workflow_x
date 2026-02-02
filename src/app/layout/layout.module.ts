@@ -13,6 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     LayoutRoutingModule,
     ReactiveFormsModule
-  ]
+  ],
+  exports: [SidebarComponent]
 })
 export class LayoutModule { }
