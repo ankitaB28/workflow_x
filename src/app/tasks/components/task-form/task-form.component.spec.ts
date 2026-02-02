@@ -11,7 +11,7 @@ describe('TaskFormComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ TaskFormComponent ],
       providers: [FormBuilder],
-      imports:[ReactiveFormsModule]
+      imports: [ReactiveFormsModule]
     })
     .compileComponents();
   });

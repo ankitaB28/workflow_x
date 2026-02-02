@@ -12,7 +12,7 @@ describe('LoginComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ LoginComponent ],
       providers: [FormBuilder],
-      imports:[
+      imports: [
         RouterTestingModule,
         ReactiveFormsModule
       ]
