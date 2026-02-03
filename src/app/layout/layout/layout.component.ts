@@ -13,6 +13,6 @@ export class LayoutComponent {
   constructor(private sidebarService: SidebarService) {}
 
   toggleSidebar(): void {
-    this.sidebarService.toggle();
+    this.sidebarService.toggle(); 
   }
 }
