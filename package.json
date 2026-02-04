@@ -32,6 +32,7 @@
     "@types/jasmine": "~3.6.0",
     "@types/minimatch": "^6.0.0",
     "@types/node": "^12.11.1",
+    "angular-cli-ghpages": "^3.0.2",
     "codelyzer": "^6.0.0",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
