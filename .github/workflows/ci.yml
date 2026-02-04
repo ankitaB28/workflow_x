@@ -2,11 +2,12 @@ name: Angular CI
 run-name: npm ci
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
   permissions:
-  contents: write
+    contents: write
+    
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -33,7 +34,7 @@ jobs:
       - name: Build Angular App
         run: npm run build -- --configuration production
   deploy:
-  needs: npm ci   
+  needs: npm ci
   runs-on: ubuntu-latest
   permissions:
     contents: write
