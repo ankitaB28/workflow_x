@@ -1,0 +1,32 @@
+:host {
+  width: 250px;
+  background: #2c3e50;
+  color: white;
+  overflow: hidden; /* VERY IMPORTANT */
+  transition: width 0.3s ease;
+}
+
+:host(.closed) {
+  width: 0;
+}
+
+
+.sidebar a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  color: #e5e7eb;              /* softer white */
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.sidebar a:hover {
+  background: rgba(255, 255, 255, 0.06); /* light hover */
+}
+
+.sidebar a.active {
+  background: rgba(79, 70, 229, 0.15);   /* lighter indigo */
+  border-left: 3px solid #6366f1;        /* softer accent */
+  color: #ffffff;
+}

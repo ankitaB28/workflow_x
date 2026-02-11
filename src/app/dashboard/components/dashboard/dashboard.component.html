@@ -1,0 +1,47 @@
+<h1 class="section-title">Dashboard</h1>
+<p class="subtitle">Overview of tasks and priorities</p>
+
+<div class="dashboard-grid">
+  <div class="card">
+    <h3 class="card-header">Tasks by Status</h3>
+    <canvas #statusChart></canvas>
+  </div>
+
+  <div class="card">
+    <h3 class="card-header">Tasks by Priority</h3>
+    <canvas #priorityChart></canvas>
+  </div>
+
+  <div class="card">
+    <h3 class="card-header">Tasks by Assignee</h3>
+    <canvas #assigneeChart></canvas>
+  </div>
+  <div class="card">
+    <h3 class="card-header">Tasks Summary</h3>
+    <div class="summary-card">
+      <div class="summary-item">
+        <span class="icon">📊</span>
+        <div>
+          <p class="label">Total Tasks</p>
+          <p class="value">{{ animatedTotal }}</p>
+        </div>
+      </div>
+
+      <div class="summary-item">
+        <span class="icon">✅</span>
+        <div>
+          <p class="label">Completed</p>
+          <p class="value success">{{ animatedCompleted }}</p>
+        </div>
+      </div>
+
+      <div class="summary-item">
+        <span class="icon">⏳</span>
+        <div>
+          <p class="label">In Progress</p>
+          <p class="value warning">{{ animatedInProgress }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

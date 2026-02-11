@@ -1,0 +1,87 @@
+.task-form {
+  max-width: 980px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 18px;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  box-sizing: border-box;
+}
+
+.fields-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 12px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    font-size: 13px;
+  }
+  input, select, textarea {
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid #dcdcdc;
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: border-color 0.15s;
+    &:focus { outline: none; border-color: #000; }
+  }
+}
+
+.field-full {
+  grid-column: 1 / -1;
+}
+
+.error {
+  color: #d12b2b;
+  font-size: 12px;
+  margin-top: 6px;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 16px;
+
+  .btn {
+    padding: 10px 16px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .btn-cancel {
+    background: transparent;
+    color: #333;
+    border: 1px solid #e6e6e6;
+  }
+
+  .btn-save {
+    background: #000;
+    color: #fff;
+  }
+
+  .btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+@media (min-width: 720px) {
+  .fields-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: minmax(40px, auto);
+    grid-gap: 14px;
+  }
+
+  .field-full {
+    grid-column: 1 / -1;
+  }
+}

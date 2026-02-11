@@ -1,0 +1,151 @@
+<h2 class="section-title">{{ isEditMode ? "Edit Task" : "Create Task" }}</h2>
+
+<!-- <form [formGroup]="taskForm" (ngSubmit)="submitTask()">
+
+
+    <label for="title">Title
+        <input type="text" id="title" name="title" autocomplete="on" formControlName="title">
+    </label>
+    <ng-container *ngIf="isInvalid(taskForm,'title')">
+        <small *ngIf="taskForm.get('title')?.errors?.required">
+            Title is required.
+        </small>
+        <small *ngIf="taskForm.get('title')?.errors?.minlength">
+            Title should be at least 3 characters long.
+        </small>
+    </ng-container>
+    <label for="description">Description</label>
+    <textarea name="description" 
+    id="description" 
+    autocomplete="on"
+    formControlName="description"></textarea>
+    <ng-container *ngIf="isInvalid(taskForm,'description')">
+        <small *ngIf="taskForm.get('description')?.errors?.required">
+            Description is required.
+        </small>
+        <small *ngIf="taskForm.get('description')?.errors?.minlength">
+            Description should be at least 10 characters long.
+        </small>
+    </ng-container>
+    <label for="priority">Priority
+        <select name="priority" id="priority" formControlName="priority">
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+        </select>
+    </label>
+    <ng-container *ngIf="isInvalid(taskForm,'priority')">
+        <small>
+            Priority is required.
+        </small>
+    </ng-container>
+    <label for="status">Status
+        <select name="status" id="status" formControlName="status">
+            <option value="OPEN">Open</option>
+            <option value="IN_PROGRESS">In Progress</option>
+            <option value="COMPLETE">Complete</option>
+        </select>
+    </label>
+    <ng-container *ngIf="isInvalid(taskForm,'status')">
+        <small>
+            Status is required.
+        </small>
+    </ng-container>
+    <label for="assignedTo">Assigned To
+        <select name="assignedTo" id="assignedTo" formControlName="assignedTo">
+            <option [value]="null">Select User</option>
+            <option *ngFor="let user of users$ | async" [value]="user.id">
+                {{user.firstname + ' ' + user.lastname}}
+            </option>
+        </select>
+    </label>
+    <label for="dueDate">Due Date
+        <input type="date" id="dueDate" formControlName="dueDate">
+    </label>
+    <ng-container *ngIf="isInvalid(taskForm,'dueDate')">
+        <small>
+            Due date is required.
+        </small>
+    </ng-container>
+    <button type="submit" [disabled]="taskForm.invalid">
+        {{isEditMode ? 'Update Task' : 'Create Task'}}
+    </button>
+    <button type="button" (click)="onCancel()">Cancel</button>
+</form> -->
+
+<form [formGroup]="taskForm" (ngSubmit)="submitTask()" class="task-form">
+  <div class="fields-grid">
+    <div class="field">
+      <label>Title</label>
+      <input type="text" formControlName="title" />
+      <div class="error" *ngIf="isInvalid(taskForm, 'title')">
+        <div *ngIf="f['title']?.errors?.['required']">Title is required.</div>
+        <div *ngIf="f['title'].errors?.['minlength']">Enter at least 3 characters.</div>
+      </div>
+    </div>
+
+    <div class="field field-full">
+      <label>Description</label>
+      <textarea rows="6" formControlName="description"></textarea>
+      <div class="error" *ngIf="isInvalid(taskForm, 'description')">
+        <div *ngIf="f['description'].errors?.['required']">
+          Description is required.
+        </div>
+        <div *ngIf="f['description'].errors?.['minlength']">
+          Enter at least 10 characters.
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Priority</label>
+      <select name="priority" id="priority" formControlName="priority">
+        <option value="Low">Low</option>
+        <option value="Medium">Medium</option>
+        <option value="High">High</option>
+      </select>
+      <div class="error" *ngIf="isInvalid(taskForm, 'priority')">
+        Priority is required.
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Status</label>
+      <select name="status" id="status" formControlName="status">
+        <option value="OPEN">Open</option>
+        <option value="IN_PROGRESS">In Progress</option>
+        <option value="COMPLETE">Complete</option>
+      </select>
+      <div class="error" *ngIf="isInvalid(taskForm, 'status')">
+        Status is required.
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Assigned To</label>
+      <select name="assignedTo" id="assignedTo" formControlName="assignedTo">
+        <option [value]="null">Select User</option>
+        <option *ngFor="let user of users$ | async" [value]="user.id">
+          {{ user.firstname + " " + user.lastname }}
+        </option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>Due Date</label>
+      <input type="date" id="dueDate" formControlName="dueDate" />
+      <div class="error" *ngIf="isInvalid(taskForm, 'dueDate')">
+        Due date is required.
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button type="button" class="btn btn-cancel" (click)="onCancel()">
+      Cancel
+    </button>
+    <button type="submit" class="btn btn-save" [disabled]="taskForm.invalid">
+        {{isEditMode ? 'Update Task' : 'Create Task'}}
+    </button>
+  </div>
+</form>

@@ -1,0 +1,16 @@
+<!-- layout.component.html -->
+<header class="header">
+  <button class="toggle-btn" (click)="toggleSidebar()">☰</button>
+  <h2 class="title">WorkFlow X</h2>
+</header>
+
+<div class="layout">
+  <app-sidebar
+    [class.closed]="(sidebarOpen$ | async) === false">
+  </app-sidebar>
+
+  <main
+    class="content">
+    <router-outlet></router-outlet>
+  </main>
+</div>
