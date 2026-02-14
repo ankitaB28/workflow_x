@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LayoutComponent } from './layout.component';
+import { SidebarComponent } from '../sidebar/sidebar.component';
 
 describe('LayoutComponent', () => {
   let component: LayoutComponent;
@@ -8,7 +9,7 @@ describe('LayoutComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LayoutComponent ]
+      declarations: [ LayoutComponent, SidebarComponent ]
     })
     .compileComponents();
   });
