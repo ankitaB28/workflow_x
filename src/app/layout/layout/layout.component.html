@@ -5,12 +5,9 @@
 </header>
 
 <div class="layout">
-  <app-sidebar
-    [class.closed]="(sidebarOpen$ | async) === false">
-  </app-sidebar>
+  <app-sidebar [class.closed]="(sidebarOpen$ | async) === false"> </app-sidebar>
 
-  <main
-    class="content">
+  <main class="content">
     <router-outlet></router-outlet>
   </main>
 </div>
