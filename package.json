@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "build:gh": "ng build WorkFlow_X --configuration=production --base-href=/workflow_x/"
   },
   "private": true,
   "dependencies": {
