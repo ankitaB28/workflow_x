@@ -17,7 +17,7 @@ jobs:
 
       - run: npm ci
 
-      - run: npm run build --configuration production --base-href /workflow_x/
+      - run: npm run build --configuration production --base-href="/workflow_x/"
 
       - run: cp dist/work-flow-x/index.html dist/work-flow-x/404.html
 
